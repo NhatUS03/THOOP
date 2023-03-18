@@ -6,10 +6,11 @@
 
 DSSinhvien::DSSinhvien()
 {
-    _a=new Sinhvien[_MAX];
-    _n=0;
+    _a=new Sinhvien[_capacity];
+    _size=0;
 }
 void DSSinhvien::DocFile(const char *file_name_in) {
+    this->~DSSinhvien(); // Delete old data before input new data
     ifstream fin;
     fin.open(file_name_in,ios::in);
     if(fin.fail())
@@ -21,8 +22,9 @@ void DSSinhvien::DocFile(const char *file_name_in) {
     while(fin.peek()!=EOF){
         _a[count].Nhap_Sinh_Vien(fin);
         count++;
-        _n++;
+        _size++;
     }
+    fin.close();
 }
 void DSSinhvien::GhiFile(const char *file_name_out) {
     ofstream fout;
@@ -33,10 +35,11 @@ void DSSinhvien::GhiFile(const char *file_name_out) {
         return ;
     }
     int count=0;
-    for(int i=0;i<_n;i++)
+    for(int i=0;i<_size;i++)
     {
         _a[i].XuatFile(fout);
         fout<<endl;
     }
+    fout.close();
 }
 

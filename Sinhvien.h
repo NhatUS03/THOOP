@@ -23,6 +23,7 @@ public:
     void Nhap_Sinh_Vien(ifstream &fin);
     void Xuat();
     void XuatFile(ofstream &fout);
+    float Diem_Trung_Binh();
 };
 
 
