@@ -15,6 +15,7 @@ private:
     float _diem[3];
 public:
     Sinhvien();
+    void KhoiTao(int nten, int nma, int nngay);
     Sinhvien(char *hoten,char*maso,char*ngaysinh,float diem[]);
     Sinhvien(const Sinhvien &other);
     ~Sinhvien();

@@ -1,6 +1,6 @@
-#include <iostream>
-#include "Sinhvien.h"
+
 #include "DSSinhvien.h"
+
 int main() {
 //    float diem[3]={1,2,3};
 //    char hoten[100]="Vo Ba Hoang Nhat";
@@ -15,6 +15,5 @@ int main() {
     ds.DocFile(filein);
     const char fileout[100]="output.txt";
     ds.GhiFile(fileout);
-    Sinhvien a(b)
     return 0;
 }

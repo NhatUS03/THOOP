@@ -7,16 +7,27 @@
 using namespace std;
 Sinhvien::Sinhvien()
 {
-   _hoten=new char[100];
-   _maso=new char[20];
-   _ngaysinh=new char[20];
+    // doi sang khoi tao bang null vi:
+    // khi khoi tao DSSinhvien co bien _a = new Sinhvien[_capacity]
+    // se tu dong khoi tao tat ca cac sinh vien trong _a, va 1 so sinh
+    // vien ko su dung nhung van cap phat bo nho --> lang phi
+   _hoten = nullptr;
+   _maso = nullptr;
+   _ngaysinh = nullptr;
    _diem[0]=_diem[1]=_diem[2]=0;
+}
+// tach viec khoi tao ra khoi cac ham de tranh truong hop mang da khoi tao
+// roi ma ta lai su dung cac ham sao chep hay operator = se cap phat lai
+// bo nho moi --> leaf memory
+void Sinhvien::KhoiTao(int nten, int nma, int nngay){
+    _hoten=new char[nten];
+    _maso=new char[nma];
+    _ngaysinh=new char[nngay];
 }
 Sinhvien::Sinhvien(char *hoten,char*maso,char*ngaysinh,float diem[])
 {
-    _hoten=new char[100];
-    _maso=new char[20];
-    _ngaysinh=new char[20];
+    if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
     memcpy(_hoten,hoten, strlen(hoten)+1);
     memcpy(_maso,maso, strlen(maso)+1);
     memcpy(_ngaysinh,ngaysinh, strlen(ngaysinh)+1);
@@ -24,9 +35,8 @@ Sinhvien::Sinhvien(char *hoten,char*maso,char*ngaysinh,float diem[])
 }
 Sinhvien::Sinhvien(const Sinhvien &other)
 {
-    _hoten=new char[100];
-    _maso=new char[20];
-    _ngaysinh=new char[20];
+    if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
     memcpy(_hoten,other._hoten, strlen(other._hoten)+1);
     memcpy(_maso,other._maso, strlen(other._maso)+1);
     memcpy(_ngaysinh,other._ngaysinh, strlen(other._ngaysinh)+1);
@@ -41,22 +51,23 @@ Sinhvien::~Sinhvien()
 void Sinhvien::Xuat() {
     cout<<_hoten<<","<<_maso<<","<<_ngaysinh<<","<<_diem[0]<<" "<<_diem[1]<<" "<<_diem[2];
 }
+
 Sinhvien Sinhvien::Saochep(const Sinhvien& other)
 {
-    _hoten=new char[100];
-    _maso=new char[20];
-    _ngaysinh=new char[20];
+;
+    if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
     memcpy(_hoten,other._hoten, strlen(other._hoten)+1);
     memcpy(_maso,other._maso, strlen(other._maso)+1);
     memcpy(_ngaysinh,other._ngaysinh, strlen(other._ngaysinh)+1);
+
     for(int i=0;i<3;i++){ _diem[i]=other._diem[i];}
     return *this;
 }
 Sinhvien Sinhvien::operator=(const Sinhvien &other)
 {
-    _hoten=new char[100];
-    _maso=new char[20];
-    _ngaysinh=new char[20];
+    if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
     memcpy(_hoten,other._hoten, strlen(other._hoten)+1);
     memcpy(_maso,other._maso, strlen(other._maso)+1);
     memcpy(_ngaysinh,other._ngaysinh, strlen(other._ngaysinh)+1);
@@ -64,6 +75,9 @@ Sinhvien Sinhvien::operator=(const Sinhvien &other)
     return *this;
 }
 void Sinhvien::Nhap_Sinh_Vien(ifstream &fin) {
+
+    if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
     char temp[200];
     fin.getline(temp,200);
     char *token = strtok(temp, ",");
@@ -81,4 +95,8 @@ void Sinhvien::Nhap_Sinh_Vien(ifstream &fin) {
 }
 void Sinhvien::XuatFile(ofstream &fout) {
     fout<<_hoten<<","<<_maso<<","<<_ngaysinh<<","<<_diem[0]<<" "<<_diem[1]<<" "<<_diem[2];
+}
+
+float Sinhvien::Diem_Trung_Binh(){
+    return (_diem[0] + _diem[1] + _diem[2])/3;
 }
