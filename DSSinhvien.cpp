@@ -6,12 +6,12 @@
 
 DSSinhvien::DSSinhvien()
 {
-    _capacity = 100;
+    _capacity = 1;
     _a = new Sinhvien[_capacity];
     _size=0;
 }
 DSSinhvien::~DSSinhvien(){
-    delete _a;
+    delete[] _a;
     _a = nullptr;
     _size = 0;
 }
@@ -73,7 +73,13 @@ void DSSinhvien::DSDiemKem(const char* fileName){
 }
 
 void DSSinhvien::tangCapacity(){
-    realloc((void*)_a, _capacity*2);
+    Sinhvien* temp = new Sinhvien[_capacity*2];
+    for(int i = 0; i < _size; i++){
+        // copy 
+        temp[i] = _a[i];
+    }
+    delete[] _a;
+    _a = temp;
     _capacity *= 2;
 }
 

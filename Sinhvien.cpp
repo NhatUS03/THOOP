@@ -44,9 +44,12 @@ Sinhvien::Sinhvien(const Sinhvien &other)
 }
 Sinhvien::~Sinhvien()
 {
-    delete[]_hoten;
-    delete[]_maso;
-    delete[]_ngaysinh;
+    if(_hoten != nullptr){
+        delete[] _hoten;
+        delete[] _maso;
+        delete[] _ngaysinh;
+        _hoten = _maso = _ngaysinh = nullptr;
+    }
 }
 void Sinhvien::Xuat() {
     cout<<_hoten<<","<<_maso<<","<<_ngaysinh<<","<<_diem[0]<<" "<<_diem[1]<<" "<<_diem[2];
