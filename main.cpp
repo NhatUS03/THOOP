@@ -15,6 +15,7 @@ int main() {
     ds.DocFile(filein);
     const char fileout[100]="output.txt";
     ds.GhiFile(fileout);
-    //ds.DSDiemKem("DiemKem.txt");
+    //ds.DSDiemKem("output.txt");
+    ds.xuatDSSVSinhNhatHomNay();
     return 0;
 }

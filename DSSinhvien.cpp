@@ -56,7 +56,7 @@ float DSSinhvien::DiemTBLop(){
     return res/_size;
 }
 
-void DSSinhvien::ThemSinhVien(const Sinhvien sv){
+void DSSinhvien::ThemSinhVien(const Sinhvien& sv){
     _a[_size] = sv;
     _size += 1;
     if(_size >= _capacity) tangCapacity();
@@ -83,3 +83,16 @@ void DSSinhvien::tangCapacity(){
     _capacity *= 2;
 }
 
+void DSSinhvien::XuatDSCoXepLoai(){
+    for(int i = 0; i < _size; i++){
+        _a[i].Xuat();
+        cout << "\t-->Xep loai: " << _a[i].Xep_Loai() << endl;
+    }
+};
+
+void DSSinhvien::xuatDSSVSinhNhatHomNay(){
+    for(int i = 0; i < _size; i++){
+        if(_a[i].laSinhNhat())
+            _a[i].Xuat();
+    }
+};

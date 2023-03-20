@@ -52,7 +52,10 @@ Sinhvien::~Sinhvien()
     }
 }
 void Sinhvien::Xuat() {
-    cout<<_hoten<<","<<_maso<<","<<_ngaysinh<<","<<_diem[0]<<" "<<_diem[1]<<" "<<_diem[2];
+    cout<<"\tHo ten: "<<_hoten<< endl;
+    cout <<"\tMa so:"<<_maso<<endl;
+    cout <<"\tNgay sinh: "<<_ngaysinh<<endl;
+    cout <<"\tDiem: "<<_diem[0]<<" "<<_diem[1]<<" "<<_diem[2] << endl;
 }
 
 Sinhvien Sinhvien::Saochep(const Sinhvien& other)
@@ -67,15 +70,16 @@ Sinhvien Sinhvien::Saochep(const Sinhvien& other)
     for(int i=0;i<3;i++){ _diem[i]=other._diem[i];}
     return *this;
 }
-Sinhvien Sinhvien::operator=(const Sinhvien &other)
-{
-    if(_hoten == nullptr) KhoiTao(100, 20, 20);
 
-    memcpy(_hoten,other._hoten, strlen(other._hoten)+1);
-    memcpy(_maso,other._maso, strlen(other._maso)+1);
-    memcpy(_ngaysinh,other._ngaysinh, strlen(other._ngaysinh)+1);
-    for(int i=0;i<3;i++){ _diem[i]=other._diem[i];}
-    return *this;
+ Sinhvien& Sinhvien::operator=(const Sinhvien &other)
+ {
+     if(_hoten == nullptr) KhoiTao(100, 20, 20);
+
+     memcpy(_hoten,other._hoten, strlen(other._hoten)+1);
+     memcpy(_maso,other._maso, strlen(other._maso)+1);
+     memcpy(_ngaysinh,other._ngaysinh, strlen(other._ngaysinh)+1);
+     for(int i=0;i<3;i++){ _diem[i]=other._diem[i];}
+     return *this;
 }
 void Sinhvien::Nhap_Sinh_Vien(ifstream &fin) {
 
@@ -103,3 +107,35 @@ void Sinhvien::XuatFile(ofstream &fout) {
 float Sinhvien::Diem_Trung_Binh(){
     return (_diem[0] + _diem[1] + _diem[2])/3;
 }
+
+string Sinhvien::Xep_Loai(){
+    float diemTB = Diem_Trung_Binh();
+    string xeploai;
+
+    if(diemTB < 5) xeploai = "Yeu";
+    else if(diemTB < 6.5) xeploai = "Trung binh";
+    else if(diemTB < 8) xeploai = "Kha";
+    else xeploai = "Gioi";
+    return xeploai;
+}
+
+bool Sinhvien::laSinhNhat(){
+     // get the current time
+    time_t now = time(0);
+    
+    // convert it to the local time
+    tm* ltm = localtime(&now);
+    
+    // extract the day, month, and year from the local time
+    int day = ltm->tm_mday;
+    int month = 1 + ltm->tm_mon;
+
+    char temp[5];
+    strncpy(temp, _ngaysinh, 2);
+    int birday = stoi(temp);
+    strncpy(temp, _ngaysinh + 3, 2);
+    int birmonth = stoi(temp);
+
+    return day == birday && month == birmonth;
+}
+

@@ -6,6 +6,8 @@
 #define TH_BAI3_SINHVIEN_H
 #include <fstream>
 #include <iostream>
+#include<string>
+#include <ctime>
 using namespace std;
 class Sinhvien {
 private:
@@ -20,11 +22,13 @@ public:
     Sinhvien(const Sinhvien &other);
     ~Sinhvien();
     Sinhvien Saochep(const Sinhvien& other);
-    Sinhvien operator=(const Sinhvien &other);
+    Sinhvien& operator=(const Sinhvien &other);
     void Nhap_Sinh_Vien(ifstream &fin);
     void Xuat();
     void XuatFile(ofstream &fout);
     float Diem_Trung_Binh();
+    string Xep_Loai();
+    bool laSinhNhat();
 };
 
 
