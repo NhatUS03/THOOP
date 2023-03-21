@@ -139,3 +139,17 @@ bool Sinhvien::laSinhNhat(){
     return day == birday && month == birmonth;
 }
 
+istream& operator >> (istream& in, Sinhvien& src){
+    if(src._hoten == nullptr) src.KhoiTao(100, 20, 20);
+    in.ignore();
+    cout << "Nhap ho ten: ";
+    in.getline(src._hoten, 100);
+    cout << "Nhap ma so: ";
+    in.getline(src._maso, 20);
+    cout << "Nhap ngay sinh: ";
+    in.getline(src._ngaysinh, 20);
+    cout << "Nhap diem 3 mon: ";
+    in >> src._diem[0] >> src._diem[1] >> src._diem[2];
+    return in;
+};
+

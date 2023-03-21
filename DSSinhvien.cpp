@@ -23,10 +23,8 @@ void DSSinhvien::DocFile(const char *file_name_in) {
         cout<<"Can't open file!"<<endl;
         return ;
     }
-    int count=0;
     while(fin.peek()!=EOF){  
-        _a[count].Nhap_Sinh_Vien(fin);
-        count++;
+        _a[_size].Nhap_Sinh_Vien(fin);
         _size++;
         if(_size >= _capacity) tangCapacity();
     }

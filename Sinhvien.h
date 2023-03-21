@@ -29,6 +29,7 @@ public:
     float Diem_Trung_Binh();
     string Xep_Loai();
     bool laSinhNhat();
+friend istream& operator>> (istream& in, Sinhvien& src);
 };
 
 
